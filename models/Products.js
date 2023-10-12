@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-const Users = mongoose.model('users', {
-    email: {
+const Products = mongoose.model('products', {
+    designer: {
         type: String,
         required: true
     },
