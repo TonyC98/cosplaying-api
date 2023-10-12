@@ -3,8 +3,9 @@ const express = require('express')
 //express function
 const app = express()
 //route
-app.get('/', (req,res) => {
+app.get('/', (req, res) => {
     res.send('Welcome to this website')
+    console.log("test test test");
 })
 //server open
 app.listen(4000, () => {
@@ -28,6 +29,8 @@ const Users = require('./models/Users')
 //configure collections
 // const Users = db.collection('users')
 
+//main route
+
 //use route
 app.post('/signup', async (req,res) => {
     try {
@@ -35,7 +38,7 @@ app.post('/signup', async (req,res) => {
     res.send(newUser)
     console.log('testing users post route');
     } catch (err) {
-        res.err(err)
+        res.send(err)
         console.log('error with users post route');
     }
 })
