@@ -22,16 +22,21 @@ app.listen(4000, () => {
 const mongoose = require('mongoose')
 mongoose.connect('mongodb+srv://antocaricati98:7yj0nEzIuUIC7G6r@cluster0.zhl5dbi.mongodb.net/cosplaying')
 
+//models
+const Users = require('./models/Users')
+
 //configure collections
-const Users = db.collection('users')
+// const Users = db.collection('users')
 
 //use route
-app.post('/users', async (req,res) => {
+app.post('/signup', async (req,res) => {
     try {
-    let user = await Users.create(req.body)
-    res.send(user)
+    let newUser = await Users.create(req.body)
+    res.send(newUser)
+    console.log('testing users post route');
     } catch (err) {
         res.err(err)
+        console.log('error with users post route');
     }
 })
     
