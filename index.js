@@ -30,7 +30,6 @@ const Users = require('./models/Users')
 //use route
 app.post('/signup', async (req, res) => {
     try {
-        console.log(req.body)
         let newUser = await Users.create(req.body)
         res.send(newUser)
         console.log(newUser);
