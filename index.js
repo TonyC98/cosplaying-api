@@ -39,7 +39,7 @@ app.post('/signup', async (req,res) => {
     console.log('testing users post route');
     } catch (err) {
         res.send(err)
-        console.log('error with users post route');
+        console.log(err);
     }
 })
     
