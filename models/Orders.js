@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-const Products = mongoose.model('products', {
-    designer: {
+const Orders = mongoose.model('orders', {
+    email: {
         type: String,
         required: true
     },
@@ -26,4 +26,4 @@ const Products = mongoose.model('products', {
     preferences: Array
 })
 
-module.exports = Products
+module.exports = Orders

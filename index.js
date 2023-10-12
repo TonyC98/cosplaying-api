@@ -26,8 +26,13 @@ mongoose.connect('mongodb+srv://antocaricati98:7yj0nEzIuUIC7G6r@cluster0.zhl5dbi
 
 //models
 const Users = require('./models/Users')
+const Products = require('./models/Products')
+const Orders = require('./models/Orders')
+const Events = require('./models/Events')
+const Reviews = require('./models/Reviews')
 
-//use route
+// ::::: ROUTES :::::
+//signup route
 app.post('/signup', async (req, res) => {
     try {
         let newUser = await Users.create(req.body)
@@ -38,7 +43,7 @@ app.post('/signup', async (req, res) => {
         console.log(err);
     }
 })
-    
+
 //login route
 app.post('/login', async (req,res) => {
     try {
