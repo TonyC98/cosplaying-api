@@ -3,23 +3,23 @@ const mongoose = require('mongoose')
 const Users = mongoose.model('users', {
     email: {
         type: String,
-        required: true
+        // required: true
     },
     name: {
         type: String,
-        required: true
+        // required: true
     },
     password: {
         type: String,
-        required: true
+        // required: true
     },
     deliveryAddress: {
         type: String,
-        required: true
+        // required: true
     },
     billingAddress: {
         type: String,
-        require: true
+        // required: true
     },
     paymentMethod: Array,
     phone: String,

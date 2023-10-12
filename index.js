@@ -2,6 +2,12 @@
 const express = require('express')
 //express function
 const app = express()
+const bodyParser = require('body-parser')
+
+//middleware
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
 //route
 app.get('/', (req, res) => {
     res.send('Welcome to this website')
@@ -32,11 +38,12 @@ const Users = require('./models/Users')
 //main route
 
 //use route
-app.post('/signup', async (req,res) => {
+app.post('/signup', async (req, res) => {
     try {
-    let newUser = await Users.create(req.body)
-    res.send(newUser)
-    console.log('testing users post route');
+        console.log(req.body)
+        let newUser = await Users.create(req.body)
+        res.send(newUser)
+        console.log(newUser);
     } catch (err) {
         res.send(err)
         console.log(err);
