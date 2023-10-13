@@ -1,13 +1,25 @@
 //import express
 const express = require('express')
-
 //express function
 const app = express()
-const bodyParser = require('body-parser')
+//import cors
+// import cors from "cors"
+// app.use(cors())
+//dotenv
+const dotenv = require("dotenv")
+// import dotenv from "dotenv";
+dotenv.config();
+// mongoose
+const mongoose = require('mongoose')
+mongoose.connect(process.env.DB_URL)
 
 //middleware
+//::: bodyParser:::
+const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+//::: passport :::
+app.use(passport.initialize())
 
 //route
 app.get('/', (req, res) => {
@@ -20,22 +32,20 @@ app.listen(4000, () => {
     console.log("server open")
 })
 
-//importing mongoose
-const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://antocaricati98:7yj0nEzIuUIC7G6r@cluster0.zhl5dbi.mongodb.net/cosplaying')
-
 //models
 const Users = require('./models/Users')
 const Products = require('./models/Products')
 const Orders = require('./models/Orders')
 const Events = require('./models/Events')
-const Reviews = require('./models/Reviews')
+const Reviews = require('./models/Reviews');
+// const passport = require('passport');
 
 // ::::: ROUTES :::::
 //signup route
 app.post('/signup', async (req, res) => {
     try {
         let newUser = await Users.create(req.body)
+        req.login(newUser)
         res.send(newUser)
         console.log(newUser);
     } catch (err) {
@@ -47,11 +57,21 @@ app.post('/signup', async (req, res) => {
 //login route
 app.post('/login', async (req,res) => {
     try {
-        let user = await Users.findOne(req.body)
-        res.send(user)
-        console.log(user)
+        let user = await Users.findOne({
+            email: req.body.email,
+            password: req.body.password
+        })
+        if (user) {
+            console.log(user);
+            req.login(user, (err) => {
+                if (err) { throw err }
+                res.send(user)
+            })
+        } else {
+            res.send('Email or password not recognised.')
+        }
     } catch (err) {
-        res.send(err)
+        res.send('Caught error')
         console.log(err);
     }
 })
