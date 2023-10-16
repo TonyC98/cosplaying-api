@@ -1,32 +1,52 @@
-//import express
+//packages
+const createError = require('http-errors')
 const express = require('express')
-//express function
-const app = express()
-//import cors
-// import cors from "cors"
-// app.use(cors())
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const logger = require('morgan')
+const mongoose = require('mongoose')
+const cors = require('cors')
+// const passport = require('passport')
+
 //dotenv
 const dotenv = require("dotenv")
-// import dotenv from "dotenv";
 dotenv.config();
-// mongoose
-const mongoose = require('mongoose')
-mongoose.connect(process.env.DB_URL)
+
+//app
+const app = express()
 
 //middleware
+//::: logger :::
+app.use(logger('tiny'))
+app.use(
+    cors({
+      credentials: true,
+      origin: 'http://localhost:3000'
+    })
+  )
+//::: express :::
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 //::: bodyParser:::
-const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+//::: cookieParser :::
+app.use(cookieParser())
 //::: passport :::
-app.use(passport.initialize())
+// app.use(passport.initialize())
+// app.use(passport.session())
 
-//route
-app.get('/', (req, res) => {
-    res.send('Welcome to this website')
-    console.log("test test test");
-})
+// mongoose
+mongoose.connect(
+    process.env.DB_URL,
+    { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
+    () => {
+        console.log('Connected to MongoDB')
+    }
+)
 
+//security
+require('./express-sessions')(app)
 //server open
 app.listen(4000, () => {
     console.log("server open")
@@ -38,9 +58,19 @@ const Products = require('./models/Products')
 const Orders = require('./models/Orders')
 const Events = require('./models/Events')
 const Reviews = require('./models/Reviews');
-// const passport = require('passport');
 
 // ::::: ROUTES :::::
+// //server open
+// app.listen(4000, () => {
+//     console.log("server open")
+// })
+
+//homepage
+app.get('/', (req, res) => {
+    res.send('Welcome to this website')
+    console.log("test test test");
+})
+
 //signup route
 app.post('/signup', async (req, res) => {
     try {
@@ -181,3 +211,19 @@ app.patch('/products:id', async (req, res) => {
         console.log(err)
     }
 })
+
+// Catch 404 and forward to error handler
+app.use((req, res, next) => {
+    next(createError(404))
+})
+  
+  // Error Handler
+app.use((err, req, res, next) => {
+    // Respond with an error
+    res.status(err.status || 500)
+    res.send({
+        message: err
+    })
+})
+
+module.exports = app
