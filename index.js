@@ -32,9 +32,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 //::: cookieParser :::
 app.use(cookieParser())
-//::: passport :::
-// app.use(passport.initialize())
-// app.use(passport.session())
 
 // mongoose
 mongoose.connect(
