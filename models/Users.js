@@ -13,11 +13,11 @@ const Users = mongoose.model('users', {
         type: String,
         required: true
     },
-    deliveryAddress: {
+    delivery: {
         type: String,
         required: true
     },
-    billingAddress: {
+    billing: {
         type: String,
         required: true
     },

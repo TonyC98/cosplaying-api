@@ -70,11 +70,15 @@ app.get('/', (req, res) => {
 
 //signup route
 app.post('/signup', async (req, res) => {
+    console.log(req.body)
     try {
         let newUser = await Users.create(req.body)
-        req.login(newUser)
-        res.send(newUser)
-        console.log(newUser);
+        // req.login(newUser)
+        req.login(newUser, (err) => {
+            if (err) { throw err }
+            res.send(newUser)
+        })
+        // res.send(newUser)
     } catch (err) {
         res.send(err)
         console.log(err);
