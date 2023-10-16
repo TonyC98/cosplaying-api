@@ -107,13 +107,24 @@ app.post('/login', async (req,res) => {
 })
 
 //confirmation route
-app.get('/orders:id', async (req,res) => {
+// app.get('/orders:id', async (req,res) => {
+//     try {
+//         let confirmation = await Orders.findById(req.query.id)
+//         console.log(confirmation)
+//     } catch (err) {
+//         res.send(err)
+//         console.log(err);
+//     }
+// })
+//checkout get route -- seems to be same as above (commented) route?
+app.get('/orders:id', async (req, res) => {
     try {
-        let confirmation = await Orders.findById(req.query.id)
-        console.log(confirmation)
+        let confirmedOrder = await Orders.findById(req.query)
+        res.send(confirmedOrder)
+        console.log(confirmedOrder)
     } catch (err) {
         res.send(err)
-        console.log(err);
+        console.log(err)
     }
 })
 
@@ -129,16 +140,16 @@ app.get('/products', async (req, res) => {
 })
 
 //search product route ------ to be confirmed
-app.get('/products', async (req,res) => {
-    try {
-        let filteredProducts = await Products.find({ name: { $regex: 'req.query', $options: 'i' } })
-        res.send(filteredProducts)
-        console.log(filteredProducts)
-    } catch (err) {
-        res.send(err)
-        console.log(err)
-    }
-})
+// app.get('/products', async (req,res) => {
+//     try {
+//         let filteredProducts = await Products.find({ name: { $regex: 'req.query', $options: 'i' } })
+//         res.send(filteredProducts)
+//         console.log(filteredProducts)
+//     } catch (err) {
+//         res.send(err)
+//         console.log(err)
+//     }
+// })
 
 //get product route
 app.get('/products', async (req, res) => {
@@ -158,18 +169,6 @@ app.post('/orders', async (req, res) => {
         let order = await Orders.create(req.body)
         res.send(order)
         console.log(order)
-    } catch (err) {
-        res.send(err)
-        console.log(err)
-    }
-})
-
-//checkout get route
-app.get('/orders:id', async (req, res) => {
-    try {
-        let confirmedOrder = await Orders.findById(req.query)
-        res.send(confirmedOrder)
-        console.log(confirmedOrderrder)
     } catch (err) {
         res.send(err)
         console.log(err)
