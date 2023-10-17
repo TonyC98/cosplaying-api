@@ -26,6 +26,10 @@ const Products = mongoose.model('products', {
         type: Boolean,
         required: true,
         default: true
+    },
+    image: {
+        type: String,
+        required: true
     }
 })
 
