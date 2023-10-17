@@ -132,8 +132,9 @@ app.get('/orders:id', async (req, res) => {
 //all products route
 app.get('/products', async (req, res) => {
     try {
-        let products = await Products.find(req.query)
+        let products = await Products.find()
         res.send(products)
+        console.log(products)
     } catch (err) {
         res.send(err)
         console.log(err);
@@ -153,7 +154,7 @@ app.get('/products', async (req, res) => {
 // })
 
 //get product route
-app.get('/products', async (req, res) => {
+app.get('/products:id', async (req, res) => {
     try {
         let product = await Products.findById(req.query.id)
         res.send(product)
