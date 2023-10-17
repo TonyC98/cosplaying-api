@@ -191,9 +191,9 @@ app.get('/profile', async (req, res) => {
 //new product route
 app.post('/products', async (req, res) => {
     try {
-        let newProduct = await Products.createOne(req.body)
+        let newProduct = await Products.create(req.body)
         res.send(newProduct)
-            console.log(newProduct)
+        console.log(newProduct)
     } catch (err) {
         res.send(err)
         console.log(err)

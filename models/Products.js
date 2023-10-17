@@ -1,29 +1,32 @@
+const { ObjectId } = require('bson')
 const mongoose = require('mongoose')
+const Users = require('./Users')
 
 const Products = mongoose.model('products', {
-    designer: {
-        type: String,
-        required: true
-    },
+    // designer: {
+    //     type: ObjectId,
+    //     required: true,
+    //     ref: Users
+    // },
     name: {
         type: String,
         required: true
     },
-    password: {
+    size: {
         type: String,
         required: true
     },
-    deliveryAddress: {
-        type: String,
+    category: [String],
+    price: {
+        type: Number,
         required: true
     },
-    billingAddress: {
-        type: String,
-        required: true
-    },
-    paymentMethod: Array,
-    phone: String,
-    preferences: Array
+    description: String,
+    available: {
+        type: Boolean,
+        required: true,
+        default: true
+    }
 })
 
 module.exports = Products
