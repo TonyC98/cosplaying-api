@@ -130,7 +130,6 @@ app.get('/orders:id', async (req, res) => {
 })
 
 //all products route
-<<<<<<< HEAD
 // app.get('/products', async (req, res) => {
 //     try {
 //         let products = await Products.find(req.query)
@@ -140,18 +139,6 @@ app.get('/orders:id', async (req, res) => {
 //         console.log(err);
 //     }
 // })
-=======
-app.get('/products', async (req, res) => {
-    try {
-        let products = await Products.find()
-        res.send(products)
-        console.log(products)
-    } catch (err) {
-        res.send(err)
-        console.log(err);
-    }
-})
->>>>>>> 6a1f9c80251479868ff275b2f82ab3ed2475419e
 
 //search product route ------ to be confirmed
 // app.get('/products', async (req,res) => {
@@ -166,7 +153,7 @@ app.get('/products', async (req, res) => {
 // })
 
 //get product route
-app.get('/products:id', async (req, res) => {
+app.get('/products', async (req, res) => {
     try {
         let product = await Products.findById(req.query.id)
         res.send(product)
