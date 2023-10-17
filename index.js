@@ -130,15 +130,15 @@ app.get('/orders:id', async (req, res) => {
 })
 
 //all products route
-app.get('/products', async (req, res) => {
-    try {
-        let products = await Products.find(req.query)
-        res.send(products)
-    } catch (err) {
-        res.send(err)
-        console.log(err);
-    }
-})
+// app.get('/products', async (req, res) => {
+//     try {
+//         let products = await Products.find(req.query)
+//         res.send(products)
+//     } catch (err) {
+//         res.send(err)
+//         console.log(err);
+//     }
+// })
 
 //search product route ------ to be confirmed
 // app.get('/products', async (req,res) => {
