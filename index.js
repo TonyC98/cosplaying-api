@@ -179,9 +179,14 @@ app.post('/orders', async (req, res) => {
 //get profile route
 app.get('/profile', async (req, res) => {
     try {
-        let profile = await Users.findById(req.query)
-        res.send(profile)
-        console.log(profile)
+        if (req.isAuthenticated()){
+
+            // console.log(req.user)
+            let profile = await Users.findById(req.user._id)
+            res.send(profile)
+        } else {
+            res.send('pls log in')
+        }
     } catch (err) {
         res.send(err)
         console.log(err)
@@ -211,6 +216,7 @@ app.patch('/products:id', async (req, res) => {
         console.log(err)
     }
 })
+
 
 // Catch 404 and forward to error handler
 app.use((req, res, next) => {
