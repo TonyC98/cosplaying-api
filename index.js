@@ -153,11 +153,10 @@ app.get('/products', async (req, res) => {
 // })
 
 //get product route
-app.get('/products', async (req, res) => {
+app.get('/products/:id', async (req, res) => {
     try {
-        let product = await Products.findById(req.query.id)
+        let product = await Products.findById(req.params.id)
         res.send(product)
-        console.log(product)
     } catch (err) {
         res.send(err)
         console.log(err)
