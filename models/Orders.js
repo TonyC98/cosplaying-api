@@ -1,29 +1,27 @@
 const mongoose = require('mongoose')
+import { ObjectId } from 'mongoose'
 
 const Orders = mongoose.model('orders', {
-    email: {
-        type: String,
+    customer: {
+        type: ObjectId,
+        ref: 'users',
         required: true
     },
-    name: {
-        type: String,
+    product: {
+        type: ObjectId,
+        ref: 'products',
         required: true
     },
-    password: {
-        type: String,
-        required: true
+    quantity: {
+        type: Number,
+        required: true,
+        default: 1
     },
-    deliveryAddress: {
-        type: String,
-        required: true
-    },
-    billingAddress: {
-        type: String,
-        required: true
-    },
-    paymentMethod: Array,
-    phone: String,
-    preferences: Array
+    date: {
+        type: Date,
+        required: true,
+        default: Date.now
+    }
 })
 
 module.exports = Orders
