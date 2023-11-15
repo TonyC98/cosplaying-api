@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-import { ObjectId } from 'mongoose'
+const { ObjectId } = require('bson')
 
 const Orders = mongoose.model('orders', {
     customer: {
